@@ -1,26 +1,121 @@
-@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --foreground-rgb: 33, 41, 66;
+  --background-start-rgb: 246, 247, 249;
+  --background-end-rgb: 236, 238, 242;
+  --primary-glow: conic-gradient(
+    from 180deg at 50% 50%,
+    #00a4e6 0deg,
+    #2ecfff 55deg,
+    #5cd7ff 120deg,
+    #844dff 160deg,
+    #7831ff 200deg,
+    #571ae5 240deg,
+    #00c3ff 300deg,
+    #00a4e6 360deg
+  );
+  --secondary-glow: radial-gradient(
+    rgba(0, 195, 255, 0.15),
+    rgba(132, 77, 255, 0.15)
+  );
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --foreground-rgb: 236, 238, 242;
+    --background-start-rgb: 12, 14, 24;
+    --background-end-rgb: 23, 27, 45;
+    --primary-glow: radial-gradient(
+      rgba(0, 195, 255, 0.25),
+      rgba(0, 195, 255, 0)
+    );
+    --secondary-glow: linear-gradient(
+      to bottom right,
+      rgba(0, 195, 255, 0.1),
+      rgba(132, 77, 255, 0.1),
+      rgba(0, 195, 255, 0)
+    );
   }
 }
 
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html,
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  max-width: 100vw;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+}
+
+/* Custom form styles to replace @tailwindcss/forms */
+@layer base {
+  [type='text'],
+  [type='email'],
+  [type='url'],
+  [type='password'],
+  [type='number'],
+  [type='date'],
+  [type='datetime-local'],
+  [type='month'],
+  [type='search'],
+  [type='tel'],
+  [type='time'],
+  [type='week'],
+  [multiple],
+  textarea,
+  select {
+    @apply w-full rounded-md border-gray-300 shadow-sm;
+    @apply focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50;
+  }
+  
+  [type='checkbox'],
+  [type='radio'] {
+    @apply rounded border-gray-300 text-blue-600 shadow-sm;
+    @apply focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 focus:ring-offset-0;
+  }
+}
+
+@layer components {
+  .card {
+    @apply relative overflow-hidden rounded-xl border border-dark-200/50 bg-white bg-opacity-80 p-6 backdrop-blur-sm transition-all duration-300 hover:shadow-glow dark:border-dark-700/50 dark:bg-dark-900/70 dark:hover:border-primary-600/50;
+  }
+
+  .btn-primary {
+    @apply relative overflow-hidden rounded-lg bg-primary-600 px-4 py-2 font-medium text-white transition-all duration-300 hover:bg-primary-700 hover:shadow-glow focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2;
+  }
+
+  .btn-secondary {
+    @apply relative overflow-hidden rounded-lg bg-secondary-600 px-4 py-2 font-medium text-white transition-all duration-300 hover:bg-secondary-700 hover:shadow-glow focus:outline-none focus:ring-2 focus:ring-secondary-500 focus:ring-offset-2;
+  }
+
+  .input-primary {
+    @apply rounded-lg border-dark-200 bg-white bg-opacity-80 shadow-sm backdrop-blur-xs focus:border-primary-500 focus:ring-primary-500 dark:border-dark-700 dark:bg-dark-800/70 dark:text-white;
+  }
+
+  .select-primary {
+    @apply rounded-lg border-dark-200 bg-white bg-opacity-80 shadow-sm backdrop-blur-xs focus:border-primary-500 focus:ring-primary-500 dark:border-dark-700 dark:bg-dark-800/70 dark:text-white;
+  }
+  
+  .glass-panel {
+    @apply bg-white bg-opacity-80 backdrop-blur-sm dark:bg-dark-900/70;
+  }
 }

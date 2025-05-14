@@ -1,36 +1,58 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Private Market Fund Management UI
+
+A proof-of-concept (POC) web application for creating and subscribing to private market funds.
+
+## Features
+
+- Create private market funds with customizable parameters
+- Switch between different user roles (Fund Manager, Investors A, B, and C)
+- Subscribe to available funds as an investor
+- View fund details and subscription information
+
+## Fund Creation Parameters
+
+When creating a fund, you can specify the following parameters:
+
+1. Management Fee (%)
+2. Performance Fee (%)
+3. Performance Fee Calculation Methodology (Hard Hurdle, Soft Hurdle, High Water Mark)
+4. Fund Level Transparency (Low, Medium, High)
+5. Hurdle Rate (%)
 
 ## Getting Started
 
-First, run the development server:
+First, clone the repository and install dependencies:
+
+```bash
+git clone <repository-url>
+cd fund-management-ui
+npm install
+```
+
+Then, run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## User Roles
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+The application supports four different user roles:
 
-## Learn More
+1. **Fund Manager** - Can create and manage funds
+2. **Investor A, B, C** - Can view and subscribe to available funds
 
-To learn more about Next.js, take a look at the following resources:
+You can switch between roles using the user switcher in the top-right corner of the application.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Technologies Used
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- Next.js
+- React
+- TypeScript 
+- Tailwind CSS
 
-## Deploy on Vercel
+## License
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+[MIT](https://choosealicense.com/licenses/mit/)
