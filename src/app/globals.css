@@ -92,6 +92,11 @@ body {
     @apply rounded border-gray-300 text-blue-600 shadow-sm;
     @apply focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 focus:ring-offset-0;
   }
+  
+  /* Force select option elements to have black text */
+  select, option {
+    @apply text-black;
+  }
 }
 
 @layer components {

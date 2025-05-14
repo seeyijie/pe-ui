@@ -1,6 +1,7 @@
-import type { Config } from 'tailwindcss'
+const defaultTheme = require('tailwindcss/defaultTheme');
 
-const config: Config = {
+/** @type {import('tailwindcss').Config} */
+module.exports = {
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
@@ -49,17 +50,17 @@ const config: Config = {
         },
       },
       fontFamily: {
-        sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-        mono: ['JetBrains Mono', 'ui-monospace', 'monospace'],
+        sans: ['Inter', ...defaultTheme.fontFamily.sans],
+        mono: ['JetBrains Mono', ...defaultTheme.fontFamily.mono],
       },
       borderRadius: {
-        'xl': '0.75rem',      // 12px
-        '2xl': '1rem',        // 16px
-        '3xl': '1.5rem',      // 24px
-        '4xl': '2rem',        // 32px
+        xl: '0.75rem',
+        '2xl': '1rem',
+        '3xl': '1.5rem',
+        '4xl': '2rem',
       },
       boxShadow: {
-        'glow': '0 0 10px rgba(0, 195, 255, 0.5), 0 0 20px rgba(0, 195, 255, 0.3)',
+        glow: '0 0 10px rgba(0, 195, 255, 0.5), 0 0 20px rgba(0, 195, 255, 0.3)',
         'glow-lg': '0 0 15px rgba(0, 195, 255, 0.6), 0 0 30px rgba(0, 195, 255, 0.4)',
         'inner-glow': 'inset 0 0 5px rgba(0, 195, 255, 0.3)',
       },
@@ -71,6 +72,5 @@ const config: Config = {
       },
     },
   },
-  plugins: [],
-}
-export default config 
+  plugins: [require('@tailwindcss/forms')],
+}; 

@@ -20,12 +20,12 @@ export function UserSwitcher() {
       </div>
       <div className="inline-flex items-center">
         <select
-          className="text-sm rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
+          className="text-sm text-black rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
           value={currentUser.id}
           onChange={(e) => switchUser(e.target.value)}
         >
           {users.map((user) => (
-            <option key={user.id} value={user.id}>
+            <option key={user.id} value={user.id} className="text-black">
               {user.name}
             </option>
           ))}

@@ -2,17 +2,22 @@
 
 import { useState } from 'react';
 import { useAppContext } from '@/context/AppContext';
-import { FundTransparencyLevel, PerformanceFeeMethodology } from '@/types';
+// import { FundTransparencyLevel, PerformanceFeeMethodology } from '@/types'; // Removed unused imports
 
 export function CreateFundForm() {
   const { createFund } = useAppContext();
   const [formData, setFormData] = useState({
     name: '',
-    managementFee: 2,
-    performanceFee: 20,
-    performanceFeeMethodology: 'High Water Mark' as PerformanceFeeMethodology,
-    transparencyLevel: 'Medium' as FundTransparencyLevel,
-    hurdleRate: 8,
+    managementFee: 1.5,
+    performanceFee: 15,
+    // performanceFeeMethodology: 'High Water Mark' as PerformanceFeeMethodology, // Removed
+    // transparencyLevel: 'Medium' as FundTransparencyLevel, // Removed
+    // hurdleRate: 8, // Removed
+    targetIRR: 12, // Default value
+    fundLifeSpan: 7, // Default value
+    sector: 'Technology', // Default value
+    investmentRegion: 'Global', // Default value
+    investmentStrategy: 'Growth Equity', // Default value
   });
 
   const handleChange = (
@@ -21,7 +26,7 @@ export function CreateFundForm() {
     const { name, value } = e.target;
     setFormData({
       ...formData,
-      [name]: ['managementFee', 'performanceFee', 'hurdleRate'].includes(name)
+      [name]: ['managementFee', 'performanceFee', 'targetIRR', 'fundLifeSpan'].includes(name)
         ? parseFloat(value)
         : value,
     });
@@ -33,11 +38,16 @@ export function CreateFundForm() {
     // Reset form
     setFormData({
       name: '',
-      managementFee: 2,
-      performanceFee: 20,
-      performanceFeeMethodology: 'High Water Mark' as PerformanceFeeMethodology,
-      transparencyLevel: 'Medium' as FundTransparencyLevel,
-      hurdleRate: 8,
+      managementFee: 1.5,
+      performanceFee: 15,
+      // performanceFeeMethodology: 'High Water Mark' as PerformanceFeeMethodology, // Removed
+      // transparencyLevel: 'Medium' as FundTransparencyLevel, // Removed
+      // hurdleRate: 8, // Removed
+      targetIRR: 12,
+      fundLifeSpan: 7,
+      sector: 'Technology',
+      investmentRegion: 'Global',
+      investmentStrategy: 'Growth Equity',
     });
   };
 
@@ -105,59 +115,92 @@ export function CreateFundForm() {
             </div>
           </div>
 
-          <div>
-            <label htmlFor="performanceFeeMethodology" className="block text-sm font-medium text-gray-700 mb-1">
-              Performance Fee Methodology
-            </label>
-            <select
-              id="performanceFeeMethodology"
-              name="performanceFeeMethodology"
-              required
-              value={formData.performanceFeeMethodology}
-              onChange={handleChange}
-              className="w-full rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
-            >
-              <option value="Hard Hurdle">Hard Hurdle</option>
-              <option value="Soft Hurdle">Soft Hurdle</option>
-              <option value="High Water Mark">High Water Mark</option>
-            </select>
+          {/* New Fields Start Here */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label htmlFor="targetIRR" className="block text-sm font-medium text-gray-700 mb-1">
+                Target IRR (%)
+              </label>
+              <input
+                type="number"
+                id="targetIRR"
+                name="targetIRR"
+                min="0"
+                max="100"
+                step="1"
+                required
+                value={formData.targetIRR}
+                onChange={handleChange}
+                className="w-full rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
+              />
+            </div>
+            <div>
+              <label htmlFor="fundLifeSpan" className="block text-sm font-medium text-gray-700 mb-1">
+                Fund Life Span (Years)
+              </label>
+              <input
+                type="number"
+                id="fundLifeSpan"
+                name="fundLifeSpan"
+                min="1"
+                max="20"
+                step="1"
+                required
+                value={formData.fundLifeSpan}
+                onChange={handleChange}
+                className="w-full rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
+              />
+            </div>
           </div>
 
           <div>
-            <label htmlFor="transparencyLevel" className="block text-sm font-medium text-gray-700 mb-1">
-              Fund Level Transparency
-            </label>
-            <select
-              id="transparencyLevel"
-              name="transparencyLevel"
-              required
-              value={formData.transparencyLevel}
-              onChange={handleChange}
-              className="w-full rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
-            >
-              <option value="Low">Low</option>
-              <option value="Medium">Medium</option>
-              <option value="High">High</option>
-            </select>
-          </div>
-
-          <div>
-            <label htmlFor="hurdleRate" className="block text-sm font-medium text-gray-700 mb-1">
-              Hurdle Rate (%)
+            <label htmlFor="sector" className="block text-sm font-medium text-gray-700 mb-1">
+              Sector
             </label>
             <input
-              type="number"
-              id="hurdleRate"
-              name="hurdleRate"
-              min="0"
-              max="20"
-              step="0.5"
+              type="text"
+              id="sector"
+              name="sector"
               required
-              value={formData.hurdleRate}
+              value={formData.sector}
               onChange={handleChange}
               className="w-full rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
+              placeholder="e.g., Technology, Healthcare"
             />
           </div>
+
+          <div>
+            <label htmlFor="investmentRegion" className="block text-sm font-medium text-gray-700 mb-1">
+              Investment Region
+            </label>
+            <input
+              type="text"
+              id="investmentRegion"
+              name="investmentRegion"
+              required
+              value={formData.investmentRegion}
+              onChange={handleChange}
+              className="w-full rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
+              placeholder="e.g., US, Europe, Asia"
+            />
+          </div>
+
+          <div>
+            <label htmlFor="investmentStrategy" className="block text-sm font-medium text-gray-700 mb-1">
+              Investment Strategy
+            </label>
+            <input
+              type="text"
+              id="investmentStrategy"
+              name="investmentStrategy"
+              required
+              value={formData.investmentStrategy}
+              onChange={handleChange}
+              className="w-full rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
+              placeholder="e.g., Growth Equity, Venture Capital"
+            />
+          </div>
+          {/* New Fields End Here */}
 
           <div className="pt-4">
             <button
